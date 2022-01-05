@@ -16,7 +16,8 @@ namespace DDDBook.Domain
 
 			foreach(Order o in _theOrders)
             {
-				if (o.Customer.Equals(customer))
+				//if (o.Customer.Equals(customer))
+				if(o.Customer.CustomerNumber == customer.CustomerNumber)
 					theResult.Add(o);
             }
 			return theResult;

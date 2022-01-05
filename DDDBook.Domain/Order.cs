@@ -3,11 +3,18 @@ using System.Collections;
 
 namespace DDDBook.Domain
 {
+	public enum OrderType
+    {
+		hoge,
+		fuga
+    }
 	public class Order
 	{
+		public OrderType OrderType;
 		private DateTime _orderDate;
 		private int _orderNumber;
-		public readonly Customer Customer;
+		public readonly CustomerSnapshot Customer;
+
 		private IList _orderLines = new ArrayList();
 		public IList OrderLines
         {
@@ -19,18 +26,10 @@ namespace DDDBook.Domain
 
 		public Order(Customer customer)
 		{
-			Customer = customer;
-			_orderDate = DateTime.Now;
+			Customer = customer.TakeSnapshot();
+            //Customer = customer;
+            _orderDate = DateTime.Now;
 		}
-
-		//没案
-		//public Order(int orderNumber, DateTime orderDate, Customer customer)
-		//      {
-		//      }
-		//public void SetFieldWhenReconstitutingFromPersistence
-		//	(int fieldKey, object value)
-		//{ }
-
 
 		public DateTime OrderDate
         {
@@ -44,7 +43,6 @@ namespace DDDBook.Domain
 
         public decimal TotalAmount
 		{
-            //get { return 0; }
             get
             {
 				decimal theSum = 0;
@@ -55,8 +53,6 @@ namespace DDDBook.Domain
 				return theSum;
 			}
 		}
-
-
     }
 }
 

@@ -8,10 +8,16 @@ namespace DDDBook.Domain
         {
 			get { return _customerNumber; }
         }
+		public string Name { get; set; }
 
 		public Customer()
 		{
 		}
-	}
+
+        public CustomerSnapshot TakeSnapshot()
+        {
+			return new CustomerSnapshot(Name, CustomerNumber);
+        }
+    }
 }
 

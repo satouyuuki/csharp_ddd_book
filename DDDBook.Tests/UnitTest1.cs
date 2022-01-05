@@ -138,4 +138,19 @@ public class Tests
 
         Assert.AreEqual(104.00, ol.TotalAmount);
     }
+    [Test]
+    public void OrderHasSnapShotOfRealCustomer()
+    {
+        Customer c = new Customer();
+        c.Name = "Volvo";
+
+        //CustomerSnapshot aHistoricCustomer = c.TakeSnapshot();
+        //Order o = new Order(aHistoricCustomer);
+        Order o = new Order(c);
+
+        c.Name = "Saab";
+
+        Assert.AreEqual("Saab", c.Name);
+        Assert.AreEqual("Volvo", o.Customer.Name);
+    }
 }
